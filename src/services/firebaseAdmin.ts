@@ -8,14 +8,14 @@ admin.initializeApp({
     credential: admin.credential.cert(credentials)
 });
 
-export function firebaseAuthMiddleware(req: AuthoredRequest, res: Response, next: NextFunction) {
+export function firebaseAuthMiddleware(req: AuthoredRequest, res: Response, next: NextFunction) : Promise<void> {
     return admin
         .auth()
         .verifyIdToken(req.header('Authorization'))
-        .then(function(decodedToken) {
+        .then((decodedToken: admin.auth.DecodedIdToken) => {
             req.user = decodedToken;
             next();
-        }).catch(function(error) {
+        }).catch(() => {
             res.status(401);
         });
 }
