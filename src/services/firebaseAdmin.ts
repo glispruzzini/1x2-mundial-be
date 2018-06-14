@@ -1,5 +1,5 @@
 import { Response, NextFunction } from "express";
-import { AuthoredRequest } from "../interfaces/customExpress";
+import { AuthoredRequest } from "../interfaces/customExpress.interface";
 import * as admin from 'firebase-admin';
 
 const credentials = require("../../secret-secretante.json");
