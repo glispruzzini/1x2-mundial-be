@@ -4,6 +4,7 @@ import * as express from "express";
 
 import routing from "./router";
 import { firebaseAuthMiddleware } from "./services/firebaseAdmin";
+import { AgendaService } from './services/agenda.service';
 
 export class Server {
     public static bootstrap(): Server {
@@ -16,6 +17,8 @@ export class Server {
         this.config();
 
         this.routes();
+
+        AgendaService.init();
     }
     public config() {
         this.app.use(cors());
