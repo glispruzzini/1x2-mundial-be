@@ -19,7 +19,8 @@
     "firebase-admin": "^5.12.1",
     "mongoose": "^5.1.5",
     "request": "^2.87.0",
-    "request-promise-native": "^1.0.5"
+    "request-promise-native": "^1.0.5",
+    "moment": "^2.22.2"
   },
   "devDependencies": {
     "@types/agenda": "^1.0.3",
@@ -27,6 +28,8 @@
     "@types/express": "^4.16.0",
     "@types/request": "^2.47.0",
     "@types/request-promise-native": "^1.0.15",
+    "@types/mongodb": "^3.0.19",
+    "@types/mongoose": "^5.0.16",
     "ts-node": "^6.1.1",
     "typescript": "^2.9.2"
   }
