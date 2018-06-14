@@ -64,3 +64,5 @@ typings/
 secret-secretante.json
 .vscode/
 .DS_Store
+
+secret-secretante_json.js
