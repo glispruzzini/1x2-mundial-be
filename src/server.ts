@@ -26,7 +26,7 @@ export class Server {
         this.app.use(bodyParser.json());
     }
     public routes() {
-        this.app.use("/", routing);
+        this.app.use("/public", routing);
         this.app.use("/security", firebaseAuthMiddleware, routing);
         this.app.listen(3082, () => {
             // tslint:disable-next-line:no-console
