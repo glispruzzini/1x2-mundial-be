@@ -3,6 +3,7 @@ import * as cors from "cors";
 import * as express from "express";
 
 import routing from "./router";
+import { firebaseAuthMiddleware } from "./services/firebaseAdmin";
 
 export class Server {
     public static bootstrap(): Server {
@@ -23,6 +24,7 @@ export class Server {
     }
     public routes() {
         this.app.use("/", routing);
+        this.app.use("/security", firebaseAuthMiddleware, routing);
         this.app.listen(3082, () => {
             // tslint:disable-next-line:no-console
             console.log("Running");
