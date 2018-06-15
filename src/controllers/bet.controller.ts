@@ -13,28 +13,50 @@ export class BetController {
                 error: ApiError.MISSING_OR_INVALID_TOKEN
             }); 
         }
-        let tempBet = new Bet({
-            user: req.user.uid,
-            match: req.body.match,
-            result: req.body.result
-        });
 
-        return UserService
-            .getLife(req.user.uid)
-            .then(life => {
-                if (life < 1) {
-                    return res.status(400).send({
-                        error: ApiError.NO_MORE_LIFE
-                    });
+        Bet
+            .findOne({
+                $and: [{
+                    user: req.user.uid
+                }, {
+                    match: req.body.match
+                }]
+            })
+            .exec()
+            .then(olderBet => {
+                if (olderBet) {
+                    return res.status(409).send(ApiError.BET_ALREADY_PLACED)
                 }
-                tempBet.save((err) => {
-                    if (err) {
-                        console.log(err);
-                        return res.sendStatus(500);
-                    }
+
+                let tempBet = new Bet({
+                    user: req.user.uid,
+                    match: req.body.match,
+                    result: req.body.result
+                });
         
-                    return res.sendStatus(200);
-                })
-            });
+                return UserService
+                    .getLife(req.user.uid)
+                    .then(life => {
+                        if (life < 1) {
+                            return res.status(400).send({
+                                error: ApiError.NO_MORE_LIFE
+                            });
+                        }
+                        tempBet.save((err) => {
+                            if (err) {
+                                console.log(err);
+                                return res.sendStatus(500);
+                            }
+                
+                            return res.send({
+                                status: true
+                            });
+                        })
+                    });
+            })
+            .catch(err => {
+                console.error(err);
+                res.sendStatus(500);
+            })
     }
 }
