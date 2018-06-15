@@ -1,10 +1,11 @@
 import { model, Schema, Types } from 'mongoose';
 
 import { IBet, IBetModel, BetResults } from "../interfaces/bet.interface";
+import { IMatch } from "../interfaces/match.interface";
 
 export class BetModel extends Schema implements IBet {
     user: string;
-    match: Types.ObjectId;
+    match: IMatch;
     result: BetResults;
 
     constructor() {

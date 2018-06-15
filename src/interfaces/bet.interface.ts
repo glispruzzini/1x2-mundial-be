@@ -1,4 +1,5 @@
 import { Document, Types } from 'mongoose';
+import { IMatch } from './match.interface';
 
 export enum BetResults {
     HOME = "1",
@@ -7,18 +8,9 @@ export enum BetResults {
 }
 
 export interface IBet {
-    user: {
-        required: true,
-        type: string
-    };
-    match: {
-        required: true,
-        type: Types.ObjectId
-    }
-    result: {
-        required: true,
-        type: BetResults
-    }
+    user: string;
+    match: IMatch
+    result: BetResults
 }
 
 export interface IBetModel extends IBet, Document {} 
