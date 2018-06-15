@@ -4,7 +4,7 @@ import { AuthoredRequest } from "../interfaces/customExpress.interface";
 import { Bet } from "../models/bet.model";
 import { ApiError } from "../interfaces/api-error.interface";
 
-import { LifeService } from "../services/life.service";
+import { UserService } from "../services/user.service";
 
 export class BetController {
     public addBet (req: AuthoredRequest, res: Response) {
@@ -19,8 +19,8 @@ export class BetController {
             result: req.body.result
         });
 
-        return LifeService
-            .get(req.user.uid)
+        return UserService
+            .getLife(req.user.uid)
             .then(life => {
                 if (life < 1) {
                     return res.status(400).send({
