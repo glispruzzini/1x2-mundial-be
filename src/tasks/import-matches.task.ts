@@ -15,7 +15,7 @@ AgendaService.define('import matches', async job => {
         await Promise.all(data.rounds.map(async matchDay => {
             await Promise.all(matchDay.matches.map(async match => {
                 const oldMatch = await Match.findOne({
-                    id: match.num
+                    num: match.num
                 });
 
                 if (oldMatch) {
