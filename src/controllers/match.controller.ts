@@ -15,6 +15,7 @@ export class MatchController {
                     $lt: tomorrow.toDate()
                 }
             })
+            .populate('team1 team2')
             .exec()
             .then((matches) => {
                 let filteredMatches = matches.filter(match => {
