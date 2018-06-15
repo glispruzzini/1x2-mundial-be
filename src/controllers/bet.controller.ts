@@ -18,6 +18,6 @@ export class BetController {
             }
 
             res.sendStatus(200);
-        })
+        });
     }
 }

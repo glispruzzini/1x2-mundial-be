@@ -35,6 +35,6 @@ export class MatchController {
             .catch((err) => {
                 console.log(err);
                 return res.sendStatus(500);
-            })
+            });
     }
 }
