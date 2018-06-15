@@ -10,7 +10,7 @@ AgendaService.define('import teams', async job => {
         const rawData = await request.get(JSON_URL);
         const data = JSON.parse(rawData);
 
-        Promise.all(data.teams.map(async team => {
+        await Promise.all(data.teams.map(async team => {
             const oldTeam = await Team.findOne({
                 code: team.code
             });
@@ -23,9 +23,7 @@ AgendaService.define('import teams', async job => {
                 color: '#ff0000',
                 continent: team.continent
             }).save();
-        })).catch(err => {
-            throw err;
-        });
+        }));
     } catch (err) {
         console.log('Import teams error: ' + err);
     }

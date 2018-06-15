@@ -1,3 +1,5 @@
+process.env.TZ = 'UTC';
+
 import { DB } from "./src/database";
 import { Server } from "./src/server";
 
