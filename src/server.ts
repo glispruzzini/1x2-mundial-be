@@ -29,7 +29,7 @@ export class Server {
     public routes() {
         this.app.use("/public", routing);
         // this.app.use("/security", firebaseAuthMiddleware, routing);
-        this.app.use("/security", secureRouting);
+        this.app.use("/security", firebaseAuthMiddleware, secureRouting);
         this.app.listen(3082, () => {
             // tslint:disable-next-line:no-console
             console.log("Running");
