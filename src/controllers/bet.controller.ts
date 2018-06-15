@@ -1,5 +1,7 @@
 import { Response } from "express";
 
+import * as mongoose from 'mongoose';
+
 import { AuthoredRequest } from "../interfaces/customExpress.interface";
 import { Bet } from "../models/bet.model";
 import { ApiError } from "../interfaces/api-error.interface";
@@ -36,5 +38,16 @@ export class BetController {
                     return res.sendStatus(200);
                 })
             });
+    }
+
+    // TODO: remove in prod
+    public async addTestBet(req, res) {
+        await new Bet({
+            user: 'abcde12345',
+            match: mongoose.Types.ObjectId,
+            result: ['1', 'X', '2'][Math.floor(Math.random() * 3)]
+        });
+        
+        res.send({ status: 'ok' });
     }
 }
