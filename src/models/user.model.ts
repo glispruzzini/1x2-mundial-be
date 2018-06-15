@@ -10,6 +10,7 @@ export class UserSchema extends Schema implements IUser {
     constructor() {
         super({
             uid: {
+                unique: true,
                 type: String,
                 required: true
             },

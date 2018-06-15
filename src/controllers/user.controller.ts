@@ -15,14 +15,20 @@ export class UserController {
                 return UserService.addNewUser(decodedToken.uid).then(userModel => {
                     userModel.save(err => {
                         if (err) {
+                            if (err.code === 11000) {
+                                return res.status(409).send(ApiError.USER_ALREADY_CREATED);
+                            }
                             console.log(err);
                             return res.sendStatus(500);
                         }
-                        return res.sendStatus(200);
+                        return res.send({
+                            status: true
+                        });
                     })
                 })
             })
-            .catch(() => {
+            .catch((err) => {
+                console.log(err);
                 return res.sendStatus(500);
             });
     }

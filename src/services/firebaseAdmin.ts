@@ -2,7 +2,7 @@ import { Response, NextFunction } from "express";
 import { AuthoredRequest } from "../interfaces/customExpress.interface";
 import * as admin from 'firebase-admin';
 
-const credentials = require("../../secret-secretante.json");
+const credentials = require("../../x2mundial-firebase-adminsdk-u6pg2-bbdbd2a3ed.json");
 
 admin.initializeApp({
     credential: admin.credential.cert(credentials)
