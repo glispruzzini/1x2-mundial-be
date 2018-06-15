@@ -32,4 +32,10 @@ export class UserController {
                 return res.sendStatus(500);
             });
     }
+
+    // TODO: remove in prod
+    public async createTestUser(req, res) {
+        await (await UserService.addNewUser('abcde12345')).save();
+        res.send({ status: 'ok' });
+    }
 }
