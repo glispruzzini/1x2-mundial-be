@@ -1,0 +1,4 @@
+export enum ApiError {
+    NO_MORE_LIFE = "NO_MORE_LIFE",
+    MISSING_OR_INVALID_TOKEN = "MISSING_OR_INVALID_TOKEN"
+}
