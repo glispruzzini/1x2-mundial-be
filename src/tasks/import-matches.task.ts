@@ -56,5 +56,4 @@ AgendaService.define('import matches', async job => {
     }
 });
 
-// AgendaService.every('2 seconds', 'import matches');
-AgendaService.schedule('in 2 seconds', 'import matches');
+AgendaService.every('2 hours', 'import matches');
