@@ -32,6 +32,21 @@ export class Server {
     public config() {
         this.app.use(cors());
         this.app.use(bodyParser.json());
+        this.app.use('/assets', express.static('./assets'));
+
+        this.app.get('/', (req, res) => {
+            res.send(`
+<!DOCTYPE html>
+<html style="height: 100%">
+<head>
+
+</head>
+<body style="background: url('/assets/img.jpg'); background-size: 100% 100%; height: 100%">
+    
+</body>
+</html>
+            `);
+        });
     }
 
     public routes() {

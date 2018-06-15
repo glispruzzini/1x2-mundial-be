@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "watch:serve": "ts-node mundial.ts --port 33000",
+    "watch:serve": "ts-node mundial.ts",
     "watch": "nodemon -e ts -w ./src -x npm run watch:serve",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "tslint ."
