@@ -2,6 +2,7 @@ import { Document } from 'mongoose';
 import { ITeam } from './team.interface';
 
 export interface IMatch {
+    num: number;
     date: Date;
     team1: ITeam;
     team2: ITeam;
@@ -10,6 +11,7 @@ export interface IMatch {
     score2: number;
 
     group: string;
+    matchDay: string;
     stadium: string;
 }
 
