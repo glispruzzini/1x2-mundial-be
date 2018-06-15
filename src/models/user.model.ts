@@ -3,13 +3,16 @@ import { model, Schema } from 'mongoose';
 import { IUser, IUserModel } from '../interfaces/user.interface';
 
 export class UserSchema extends Schema implements IUser {
-    token: string;
+    uid: string;
     life: number;
     points: number;
 
     constructor() {
         super({
-            user: String,
+            uid: {
+                type: String,
+                required: true
+            },
             life: {
                 type: Number,
                 default: 5

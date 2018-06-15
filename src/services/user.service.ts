@@ -5,14 +5,14 @@ import { IMatchModel, IMatch } from '../interfaces/match.interface';
 const BASE_POINTS = 100;
 
 export class UserService {
-    static async getLife(user: string): Promise<number> {
-        const userLife: IUser = await User.findOne({ user });
-        if (!userLife) throw new Error('User not found');
-        return userLife.life;
+    static async getLife(uid: string): Promise<number> {
+        const user: IUser = await User.findOne({ uid });
+        if (!user) throw new Error('User not found');
+        return user.life;
     }
 
-    static async subtractLife(token: string, val: number): Promise<number> {
-        const user: IUserModel = await User.findOne({ token });
+    static async subtractLife(uid: string, val: number): Promise<number> {
+        const user: IUserModel = await User.findOne({ uid });
         if (!user) throw new Error('User not found');
 
         user.life = Math.max(0, user.life - val);
@@ -21,8 +21,8 @@ export class UserService {
         return user.life;
     }
 
-    static async addLife(token: string, val: number): Promise<number> {
-        const user: IUserModel = await User.findOne({ token });
+    static async addLife(uid: string, val: number): Promise<number> {
+        const user: IUserModel = await User.findOne({ uid });
         if (!user) throw new Error('User not found');
 
         user.life = Math.min(5, user.life + val);
@@ -31,8 +31,8 @@ export class UserService {
         return user.life;
     }
 
-    static async addPoints(token: string, match: IMatchModel): Promise<number> {
-        const user: IUserModel = await User.findOne({ token });
+    static async addPoints(uid: string, match: IMatchModel): Promise<number> {
+        const user: IUserModel = await User.findOne({ uid });
         
         user.points += BASE_POINTS;
 
@@ -44,15 +44,15 @@ export class UserService {
         return user.points;
     }
 
-    static async addNewUser(token: string, life?: number, points?: number): Promise<IUser> {
+    static async addNewUser(uid: string, life?: number, points?: number): Promise<IUser> {
         return await new User({
-            token,
+            uid,
             life: life || 5,
             points: points || 0
         }).save();
     }
 
-    static async getUser(token: string): Promise<IUser> {
-        return await User.findOne({ token });
+    static async getUser(uid: string): Promise<IUser> {
+        return await User.findOne({ uid });
     }
 }

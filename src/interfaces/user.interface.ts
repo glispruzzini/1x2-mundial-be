@@ -1,7 +1,7 @@
 import { Document } from 'mongoose';
 
 export interface IUser {
-    token: string;
+    uid: string;
     life: number;
     points: number;
 }
