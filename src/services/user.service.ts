@@ -59,12 +59,12 @@ export class UserService {
         return user.points;
     }
 
-    static async addNewUser(uid: string, life?: number, points?: number): Promise<IUser> {
+    static async addNewUser(uid: string, life?: number, points?: number): Promise<IUserModel> {
         return await new User({
             uid,
             life: life || 5,
             points: points || 0
-        }).save();
+        });
     }
 
     static async getUser(uid: string): Promise<IUser> {

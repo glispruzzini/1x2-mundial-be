@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 
 import { User } from "../models/user.model";
+import { UserService } from "../services/user.service";
 import { ApiError } from "../interfaces/api-error.interface";
 
 import { auth } from 'firebase-admin';
@@ -9,19 +10,16 @@ import { verifyToken } from "../services/firebaseAdmin";
 
 export class UserController {
     public createUser (req: Request, res: Response) {
-        verifyToken(req.body.token)
+        return verifyToken(req.body.token)
             .then((decodedToken: auth.DecodedIdToken) => {
-                let tempUser = new User({
-                    uid: decodedToken.uid
-                });
-
-                tempUser.save(err => {
-                    if (err) {
-                        console.log(err);
-                        return res.sendStatus(500);
-                    }
-        
-                    res.sendStatus(200);
+                return UserService.addNewUser(decodedToken.uid).then(userModel => {
+                    userModel.save(err => {
+                        if (err) {
+                            console.log(err);
+                            return res.sendStatus(500);
+                        }
+                        return res.sendStatus(200);
+                    })
                 })
             })
             .catch(() => {
