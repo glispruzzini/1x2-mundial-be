@@ -1,0 +1,11 @@
+{
+    "apps": [{
+        "name": "1x2 Mundial - API",
+        "script": "mundial.ts",
+        "exec_interpreter": "node@8.6",
+        "env": {
+            "NODE_ENV": "production"
+        },
+        "args": "--port 33000"
+    }]
+}
