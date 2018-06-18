@@ -1,7 +1,5 @@
 import { Response } from "express";
 
-import * as mongoose from 'mongoose';
-
 import { AuthoredRequest } from "../interfaces/customExpress.interface";
 import { Bet } from "../models/bet.model";
 import { ApiError } from "../interfaces/api-error.interface";
@@ -62,14 +60,17 @@ export class BetController {
             })
     }
 
-    // TODO: remove in prod
-    public async addTestBet(req, res) {
-        await new Bet({
-            user: 'abcde12345',
-            match: mongoose.Types.ObjectId,
-            result: ['1', 'X', '2'][Math.floor(Math.random() * 3)]
-        });
-        
-        res.send({ status: 'ok' });
+    public async getBets(req: AuthoredRequest, res: Response) {
+        if (!req.user || !req.user.uid) {
+            return res.status(400).send({
+                error: ApiError.MISSING_OR_INVALID_TOKEN
+            }); 
+        }
+
+        const bets = await Bet.find({
+            user: req.user._id
+        }).populate('team1 team2');
+
+        res.send(bets);
     }
 }
