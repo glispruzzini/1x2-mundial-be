@@ -1,6 +1,5 @@
 import { Request, Response } from "express";
 
-import { User } from "../models/user.model";
 import { UserService } from "../services/user.service";
 import { ApiError } from "../interfaces/api-error.interface";
 
@@ -31,11 +30,5 @@ export class UserController {
                 console.log(err);
                 return res.sendStatus(500);
             });
-    }
-
-    // TODO: remove in prod
-    public async createTestUser(req, res) {
-        await (await UserService.addNewUser('abcde12345')).save();
-        res.send({ status: 'ok' });
     }
 }
